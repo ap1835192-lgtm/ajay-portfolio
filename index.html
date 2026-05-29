@@ -1,4 +1,4 @@
-<!-- આ સંપૂર્ણ HTML કોડ છે, બધું જ કામ કરશે. તમારા PC ના ફોલ્ડરમાં index.html ને આ વડે replace કરો. -->
+<!-- આ સંપૂર્ણ HTML કોડ છે, મોબાઈલ માટે modal image યોગ્ય રીતે ગોઠવાય એવું બનાવ્યું છે -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        /* Same beautiful CSS as before, keeping it compact */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; background: #0a0a0f; color: #f0f0ff; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
         body.light-mode { background: #eef2ff; color: #0a0a2a; }
@@ -44,9 +43,16 @@
         .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; margin-top: 1.5rem; }
         .cert-card { background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 24px; padding: 1rem; text-align: center; cursor: pointer; transition: 0.3s; border: 1px solid rgba(0,243,255,0.3); }
         .cert-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 16px; margin-bottom: 0.8rem; }
+        /* Modal - Mobile optimized */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { max-width: 650px; width: 90%; background: rgba(10,10,25,0.95); border-radius: 40px; padding: 2rem; text-align: center; border: 2px solid #00f3ff; position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 25px; font-size: 2rem; cursor: pointer; color: #ff00ff; }
+        .modal-content { max-width: 650px; width: 90%; background: rgba(10,10,25,0.95); border-radius: 40px; padding: 1.5rem; text-align: center; border: 2px solid #00f3ff; position: relative; margin: 1rem; }
+        .modal-image { max-width: 100%; height: auto; border-radius: 24px; margin: 1rem 0; box-shadow: 0 0 30px rgba(0,243,255,0.3); }
+        .close-modal { position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: #ff00ff; }
+        @media (max-width: 600px) {
+            .modal-content { padding: 1rem; width: 95%; }
+            .modal-header h3 { font-size: 1.2rem; }
+            .modal-header img { width: 40px; height: 40px; }
+        }
         .timeline { position: relative; padding-left: 2rem; }
         .timeline-item { position: relative; padding-bottom: 1.8rem; border-left: 2px solid #ff00ff; padding-left: 2rem; margin-bottom: 1rem; }
         .timeline-item::before { content: ''; position: absolute; left: -8px; top: 0; width: 14px; height: 14px; background: #00f3ff; border-radius: 50%; }
@@ -60,7 +66,12 @@
         .back-to-top { position: fixed; bottom: 20px; left: 20px; width: 48px; height: 48px; background: #ff00ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 100; }
         .back-to-top.visible { opacity: 1; }
         footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(0,243,255,0.3); margin-top: 2rem; }
-        @media (max-width: 768px) { .navbar { flex-direction: column; } .hero h1 { font-size: 2.5rem; } .hero-image img { width: 200px; height: 200px; } }
+        @media (max-width: 768px) { 
+            .navbar { flex-direction: column; } 
+            .hero h1 { font-size: 2.5rem; } 
+            .hero-image img { width: 200px; height: 200px; }
+            .container { padding-top: 9rem; }
+        }
     </style>
 </head>
 <body>
@@ -76,7 +87,7 @@
     <nav class="navbar"><div class="logo">AJAY ✦</div><div class="nav-links"><a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#certificates">Achievements</a><a href="#contact">Contact</a></div><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></nav>
     <div class="container">
         <section id="home" class="hero" data-aos="fade-up">
-            <div class="hero-content"><h1>Ajay Prajapati</h1><div class="typed-container" id="typed"></div><p>BCA Student | Innovation Club Secretary | Event Strategist | Public Speaker</p><div class="hero-buttons"><a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire Me</a><a href="#" id="downloadCVbtn" class="btn btn-outline"><i class="fas fa-download"></i> Download CV</a><a href="#projects" class="btn btn-outline"><i class="fas fa-code"></i> View Work</a></div></div>
+            <div class="hero-content"><h1>Ajay Prajapati</h1><div class="typed-container" id="typed"></div><p>BCA Student | Innovation Club Secretary | Event Strategist | Public Speaker</p><div class="hero-buttons"><a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire Me</a><a href="#projects" class="btn btn-outline"><i class="fas fa-code"></i> View Work</a></div></div>
             <div class="hero-image"><img src="profile.jpg" alt="Ajay Prajapati" onerror="this.src='https://randomuser.me/api/portraits/men/32.jpg'"></div>
         </section>
         <section id="about" class="glass-card" data-aos="fade-up"><h2 class="section-title">About Me</h2><div style="display:flex;flex-wrap:wrap;gap:2rem"><div style="flex:2"><p><strong>Ajay Prajapati</strong> — BCA student at V.P. & R.P.T.P. Science College (CVM), Anand. 3rd year, Innovation Club Secretary. Passionate about leadership, web dev, and event management.</p><div class="skills-grid"><span class="skill-tag">Public Speaking</span><span class="skill-tag">Leadership</span><span class="skill-tag">Team Management</span><span class="skill-tag">Web Design</span></div></div><div style="flex:1;background:rgba(0,243,255,0.1);border-radius:24px;padding:1.5rem"><h3>Quick Info</h3><p>📍 Anand, Gujarat</p><p>🎓 V.P. & R.P.T.P. Science College</p><p>💻 BCA 3rd Year (5th Sem)</p><p>🗣️ Gujarati, Hindi, English</p></div></div></section>
@@ -86,9 +97,9 @@
         <section id="certificates" data-aos="fade-up"><h2 class="section-title">✨ Certificates & Achievements</h2><div class="glass-card"><div class="cert-grid" id="certGrid"></div></div></section>
         <section id="education" data-aos="fade-up"><h2 class="section-title">Education Timeline</h2><div class="glass-card"><div class="timeline"><div class="timeline-item"><h3>🎓 BCA - V.P. & R.P.T.P. Science College</h3><p>2024-2027 | 3rd Year (5th Sem)</p></div><div class="timeline-item"><h3>📚 12th - Anand High School</h3><p>2021-2023</p></div><div class="timeline-item"><h3>📖 10th - Anand High School</h3><p>2020-2021</p></div></div><div style="margin-top:1rem"><strong>🏅 Achievements:</strong> Innovation Club Secretary, National Hackathon, 10+ Workshops, C Programming Certificate</div></div></section>
         <section id="contact" data-aos="fade-up"><h2 class="section-title">Let's Connect</h2><div class="glass-card"><div class="contact-wrapper"><div class="contact-info"><p><i class="fas fa-phone-alt"></i> <a href="tel:+916357008640">+91 63570 08640</a></p><p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/916357008640">WhatsApp Me</a></p><p><i class="fas fa-envelope"></i> <a href="mailto:ap1835192@gmail.com">ap1835192@gmail.com</a></p><p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/a._p._369_/">@a._p._369_</a></p></div><div class="contact-form"><form id="contactForm"><input type="text" placeholder="Your Name" id="cname"><input type="email" placeholder="Your Email" id="cemail"><textarea rows="4" placeholder="Message" id="cmsg"></textarea><button type="submit" class="btn btn-primary">Send Message</button></form></div></div></div></section>
-        <footer><p>Ajay Prajapati<i class="#" style="color:#ff00ff;"></i></p></footer>
+        <footer><p>© 2026 Ajay Prajapati | Designed with <i class="fas fa-heart" style="color:#ff00ff;"></i> & Cyberpunk Soul</p></footer>
     </div>
-    <div id="certModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><img src="MY IMAGE_2.jpg" alt="Ajay"><h3>Ajay Prajapati</h3></div><img id="modalCertImage" class="modal-image" src=""><p id="modalCertTitle" style="margin-top:0.8rem;"></p></div></div>
+    <div id="certModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><img src="profile.jpg" alt="Ajay"><h3>Ajay Prajapati</h3></div><img id="modalCertImage" class="modal-image" src=""><p id="modalCertTitle" style="margin-top:0.8rem;"></p></div></div>
     <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }</script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
@@ -130,7 +141,6 @@
         function animateCounter(el,target){ let start=0, step=target/50, timer=setInterval(()=>{ start+=step; if(start>=target){ el.innerText=target; clearInterval(timer); } else el.innerText=Math.floor(start); },30); }
         const obs = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ animateCounter(document.getElementById('expCounter'),2); animateCounter(document.getElementById('certCounter'),10); animateCounter(document.getElementById('eventCounter'),15); animateCounter(document.getElementById('workCounter'),12); obs.disconnect(); } }); });
         obs.observe(document.querySelector('.stats-grid'));
-        // Exact certificate names as per your files
         const certs = [
             { title: "Budding Innovators Meetup 2026", img: "cert9.jpg" },
             { title: "AI, Coding & Entrepreneurship Workshop", img: "cert3.jpg" },
